@@ -112,7 +112,7 @@ if ($hassiteconfig or has_any_capability($capabilities, $systemcontext)) {
     // Default settings category - DISABLED
     $ADMIN->add('courses', new admin_category('coursedefaultsettings', new lang_string('defaultsettingscategory', 'course')));
 
-    // Groups category - DISABLED
+    // Groups category - DISABLED loi: this is tab Courses ở site administration > Courses
     $ADMIN->add('courses', new admin_category('groups', new lang_string('groups')));
     // $ADMIN->add('groups', new admin_externalpage('group_customfield', new lang_string('group_customfield', 'admin'),
     //     $CFG->wwwroot . '/group/customfield.php', ['moodle/group:configurecustomfields']));

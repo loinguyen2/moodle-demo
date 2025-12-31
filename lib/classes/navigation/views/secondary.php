@@ -755,15 +755,28 @@ class secondary extends view {
         // exist as links with anchors appended in order to redirect back to the admin search page and the corresponding
         // tab. Note this value refers to being present on the page itself, before a search has been performed.
         $isadminsearchpage = $PAGE->url->compare(new \moodle_url('/admin/search.php', ['query' => '']), URL_MATCH_PARAMS);
+
+        // Custom: Tabs to always hide (including 'root' for General tab).
+        // add text root to $hiddentabs to hide General tab.
+        $hiddentabs = ['modules', 'appearance', 'server', 'reports', 'development'];
+
         if ($node) {
-            $siteadminnode = $this->add(get_string('general'), "#link$node->key", null, null, 'siteadminnode');
-            if ($isadminsearchpage) {
-                $siteadminnode->action = false;
-                $siteadminnode->tab = "#link$node->key";
-            } else {
-                $siteadminnode->action = new \moodle_url("/admin/search.php", [], "link$node->key");
+            // Custom: Skip adding General tab if it's in hidden list.
+            if (!in_array('root', $hiddentabs)) {
+                $siteadminnode = $this->add(get_string('general'), "#link$node->key", null, null, 'siteadminnode');
+                if ($isadminsearchpage) {
+                    $siteadminnode->action = false;
+                    $siteadminnode->tab = "#link$node->key";
+                } else {
+                    $siteadminnode->action = new \moodle_url("/admin/search.php", [], "link$node->key");
+                }
             }
             foreach ($node->children as $child) {
+                // Custom: Skip hidden tabs.
+                if (in_array($child->key, $hiddentabs)) {
+                    continue;
+                }
+
                 if ($child->display && !$child->is_short_branch()) {
                     // Mimic the current boost behaviour and pass down anchors for the tabs.
                     if ($isadminsearchpage) {
@@ -773,8 +786,6 @@ class secondary extends view {
                         $child->action = new \moodle_url("/admin/search.php", [], "link$child->key");
                     }
                     $this->add_node(clone $child);
-                } else {
-                    $siteadminnode->add_node(clone $child);
                 }
             }
         }
