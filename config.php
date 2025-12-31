@@ -7,19 +7,19 @@ $CFG = new stdClass();
 $CFG->dbtype    = 'mariadb';
 $CFG->dblibrary = 'native';
 $CFG->dbhost    = 'localhost';
-$CFG->dbname    = 'moodle';
-$CFG->dbuser    = 'root';
-$CFG->dbpass    = '';
+$CFG->dbname    = 'moodledb';
+$CFG->dbuser    = 'moodledbuser';
+$CFG->dbpass    = 'nex_@1234';
 $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array (
   'dbpersist' => 0,
   'dbport' => '',
   'dbsocket' => '',
-  'dbcollation' => 'utf8mb4_unicode_ci',
+  'dbcollation' => 'utf8mb4_general_ci',
 );
 
-$CFG->wwwroot   = 'http://localhost/moodle';
-$CFG->dataroot  = 'C:\\xampp\\moodledata';
+$CFG->wwwroot   = 'http://52.91.111.242';
+$CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0777;
