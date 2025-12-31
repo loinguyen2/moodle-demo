@@ -26,7 +26,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
+    // Custom: Hide Site admin presets from General tab.
     $ADMIN->add('root', new admin_externalpage('tool_admin_presets',
     get_string('pluginname', 'tool_admin_presets'),
-    new moodle_url('/admin/tool/admin_presets/index.php')));
+    new moodle_url('/admin/tool/admin_presets/index.php'),
+    'moodle/site:config',
+    true));
 }

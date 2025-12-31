@@ -8,36 +8,38 @@
 $systemcontext = context_system::instance();
 $hassiteconfig = has_capability('moodle/site:config', $systemcontext);
 
-$ADMIN->add('root', new admin_externalpage('adminnotifications', new lang_string('notifications'), "$CFG->wwwroot/$CFG->admin/index.php"));
+// Custom: Hide these items from General tab - set hidden=true.
+$ADMIN->add('root', new admin_externalpage('adminnotifications', new lang_string('notifications'), "$CFG->wwwroot/$CFG->admin/index.php", 'moodle/site:config', true));
 
 $ADMIN->add('root', new admin_externalpage('registrationmoodleorg', new lang_string('registration', 'admin'),
-        new moodle_url("/admin/registration/index.php")));
+        new moodle_url("/admin/registration/index.php"), 'moodle/site:config', true));
  // hidden upgrade script
 $ADMIN->add('root', new admin_externalpage('upgradesettings', new lang_string('upgradesettings', 'admin'), "$CFG->wwwroot/$CFG->admin/upgradesettings.php", 'moodle/site:config', true));
-$userfeedback = new admin_settingpage('userfeedback', new lang_string('feedbacksettings', 'admin'));
+$userfeedback = new admin_settingpage('userfeedback', new lang_string('feedbacksettings', 'admin'), 'moodle/site:config', true);
 $ADMIN->add('root', $userfeedback);
 
 if ($hassiteconfig) {
-    $optionalsubsystems = new admin_settingpage('optionalsubsystems', new lang_string('advancedfeatures', 'admin'));
+    $optionalsubsystems = new admin_settingpage('optionalsubsystems', new lang_string('advancedfeatures', 'admin'), 'moodle/site:config', true);
     $ADMIN->add('root', $optionalsubsystems);
 }
 
 $ADMIN->add('root', new admin_category('users', new lang_string('users','admin')));
 $ADMIN->add('root', new admin_category('courses', new lang_string('courses','admin')));
 $ADMIN->add('root', new admin_category('grades', new lang_string('grades')));
-$ADMIN->add('root', new admin_category('analytics', new lang_string('analytics', 'analytics')));
-$ADMIN->add('root', new admin_category('competencies', new lang_string('competencies', 'core_competency')));
-$ADMIN->add('root', new admin_category('badges', new lang_string('badges'), empty($CFG->enablebadges)));
-$ADMIN->add('root', new admin_category('h5p', new lang_string('h5p', 'core_h5p')));
-$ADMIN->add('root', new admin_category('license', new lang_string('license')));
-$ADMIN->add('root', new admin_category('location', new lang_string('location','admin')));
-$ADMIN->add('root', new admin_category('language', new lang_string('language')));
-$ADMIN->add('root', new admin_category('messaging', new lang_string('messagingcategory', 'admin')));
-$ADMIN->add('root', new admin_category('payment', new lang_string('payments', 'payment')));
+// Custom: Hide these categories from General tab - only keep Courses.
+$ADMIN->add('root', new admin_category('analytics', new lang_string('analytics', 'analytics'), true));
+$ADMIN->add('root', new admin_category('competencies', new lang_string('competencies', 'core_competency'), true));
+$ADMIN->add('root', new admin_category('badges', new lang_string('badges'), true));
+$ADMIN->add('root', new admin_category('h5p', new lang_string('h5p', 'core_h5p'), true));
+$ADMIN->add('root', new admin_category('license', new lang_string('license'), true));
+$ADMIN->add('root', new admin_category('location', new lang_string('location','admin'), true));
+$ADMIN->add('root', new admin_category('language', new lang_string('language'), true));
+$ADMIN->add('root', new admin_category('messaging', new lang_string('messagingcategory', 'admin'), true));
+$ADMIN->add('root', new admin_category('payment', new lang_string('payments', 'payment'), true));
 $ADMIN->add('root', new admin_category('modules', new lang_string('plugins', 'admin')));
-$ADMIN->add('root', new admin_category('security', new lang_string('security','admin')));
+$ADMIN->add('root', new admin_category('security', new lang_string('security','admin'), true));
 $ADMIN->add('root', new admin_category('appearance', new lang_string('appearance','admin')));
-$ADMIN->add('root', new admin_category('frontpage', new lang_string('frontpage','admin')));
+$ADMIN->add('root', new admin_category('frontpage', new lang_string('frontpage','admin'), true));
 $ADMIN->add('root', new admin_category('server', new lang_string('server','admin')));
 $ADMIN->add('root', new admin_category('mnet', new lang_string('net','mnet'), (isset($CFG->mnet_dispatcher_mode) and $CFG->mnet_dispatcher_mode === 'off')));
 $ADMIN->add('root', new admin_category('reports', new lang_string('reports')));
