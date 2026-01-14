@@ -189,11 +189,11 @@ class provider implements
         }
 
         // User context / Privacy and policies / Data requests.
-        $subcontext = [
-            get_string('privacyandpolicies', 'admin'),
-            get_string('datarequests', 'tool_dataprivacy'),
-        ];
-        writer::with_context($context)->export_data($subcontext, (object)$contextdatatowrite);
+        // $subcontext = [
+        //     get_string('privacyandpolicies', 'admin'),
+        //     get_string('datarequests', 'tool_dataprivacy'),
+        // ];
+        // writer::with_context($context)->export_data($subcontext, (object)$contextdatatowrite);
 
         // Write generic module intro files.
         helper::export_context_files($context, $user);

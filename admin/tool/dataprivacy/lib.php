@@ -40,15 +40,15 @@ function tool_dataprivacy_myprofile_navigation(tree $tree, $user, $iscurrentuser
     global $PAGE, $USER;
 
     // Get the Privacy and policies category.
-    if (!array_key_exists('privacyandpolicies', $tree->__get('categories'))) {
-        // Create the category.
-        $categoryname = get_string('privacyandpolicies', 'admin');
-        $category = new core_user\output\myprofile\category('privacyandpolicies', $categoryname, 'contact');
-        $tree->add_category($category);
-    } else {
-        // Get the existing category.
-        $category = $tree->__get('categories')['privacyandpolicies'];
-    }
+    // if (!array_key_exists('privacyandpolicies', $tree->__get('categories'))) {
+    //     // Create the category.
+    //     $categoryname = get_string('privacyandpolicies', 'admin');
+    //     $category = new core_user\output\myprofile\category('privacyandpolicies', $categoryname, 'contact');
+    //     $tree->add_category($category);
+    // } else {
+    //     // Get the existing category.
+    //     $category = $tree->__get('categories')['privacyandpolicies'];
+    // }
 
     // Contact data protection officer link.
     if (\tool_dataprivacy\api::can_contact_dpo() && $iscurrentuser) {

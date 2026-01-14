@@ -634,16 +634,16 @@ if ($hassiteconfig) {
     $ADMIN->add('server', new admin_category('webservicesettings', new lang_string('webservices', 'webservice')));
 
     // Web services > Overview.
-    $temp = new admin_settingpage('webservicesoverview', new lang_string('webservicesoverview', 'webservice'));
-    $temp->add(new admin_setting_webservicesoverview());
-    $ADMIN->add('webservicesettings', $temp);
+    // $temp = new admin_settingpage('webservicesoverview', new lang_string('webservicesoverview', 'webservice'));
+    // $temp->add(new admin_setting_webservicesoverview());
+    // $ADMIN->add('webservicesettings', $temp);
 
     // Web services > API documentation.
     $ADMIN->add('webservicesettings', new admin_externalpage('webservicedocumentation', new lang_string('wsdocapi', 'webservice'),
         "{$CFG->wwwroot}/{$CFG->admin}/webservice/documentation.php", 'moodle/site:config', false));
 
     // Web services > External services.
-    $temp = new admin_settingpage('externalservices', new lang_string('externalservices', 'webservice'));
+    // $temp = new admin_settingpage('externalservices', new lang_string('externalservices', 'webservice'));
 
     $temp->add(new admin_setting_heading('manageserviceshelpexplaination', new lang_string('information', 'webservice'),
         new lang_string('servicehelpexplanation', 'webservice')));
@@ -668,11 +668,11 @@ if ($hassiteconfig) {
         'moodle/site:config', true));
 
     // Web services > Manage protocols.
-    $temp = new admin_settingpage('webserviceprotocols', new lang_string('manageprotocols', 'webservice'));
-    $temp->add(new admin_setting_managewebserviceprotocols());
-    if (empty($CFG->enablewebservices)) {
-        $temp->add(new admin_setting_heading('webservicesaredisabled', '', new lang_string('disabledwarning', 'webservice')));
-    }
+    // $temp = new admin_settingpage('webserviceprotocols', new lang_string('manageprotocols', 'webservice'));
+    // $temp->add(new admin_setting_managewebserviceprotocols());
+    // if (empty($CFG->enablewebservices)) {
+    //     $temp->add(new admin_setting_heading('webservicesaredisabled', '', new lang_string('disabledwarning', 'webservice')));
+    // }
 
     // We cannot use $OUTPUT->doc_link() this early, we would lose the ability to set the page layout on all admin pages.
     $url = new moodle_url(get_docs_url('How_to_get_a_security_key'));

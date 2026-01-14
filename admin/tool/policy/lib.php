@@ -49,24 +49,24 @@ function tool_policy_myprofile_navigation(tree $tree, $user, $iscurrentuser, $co
     }
 
     // Get the Privacy and policies category.
-    if (!array_key_exists('privacyandpolicies', $tree->__get('categories'))) {
-        // Create the category.
-        $categoryname = get_string('privacyandpolicies', 'admin');
-        $category = new core_user\output\myprofile\category('privacyandpolicies', $categoryname, 'contact');
-        $tree->add_category($category);
-    } else {
-        // Get the existing category.
-        $category = $tree->__get('categories')['privacyandpolicies'];
-    }
+    // if (!array_key_exists('privacyandpolicies', $tree->__get('categories'))) {
+    //     // Create the category.
+    //     $categoryname = get_string('privacyandpolicies', 'admin');
+    //     $category = new core_user\output\myprofile\category('privacyandpolicies', $categoryname, 'contact');
+    //     $tree->add_category($category);
+    // } else {
+    //     // Get the existing category.
+    //     $category = $tree->__get('categories')['privacyandpolicies'];
+    // }
 
     // Add "Policies and agreements" node only for current user or users who can accept on behalf of current user.
-    $usercontext = \context_user::instance($user->id);
-    if ($iscurrentuser || has_capability('tool/policy:acceptbehalf', $usercontext)) {
-        $url = new moodle_url('/admin/tool/policy/user.php', ['userid' => $user->id]);
-        $node = new core_user\output\myprofile\node('privacyandpolicies', 'tool_policy',
-            get_string('policiesagreements', 'tool_policy'), null, $url);
-        $category->add_node($node);
-    }
+    // $usercontext = \context_user::instance($user->id);
+    // if ($iscurrentuser || has_capability('tool/policy:acceptbehalf', $usercontext)) {
+    //     $url = new moodle_url('/admin/tool/policy/user.php', ['userid' => $user->id]);
+    //     $node = new core_user\output\myprofile\node('privacyandpolicies', 'tool_policy',
+    //         get_string('policiesagreements', 'tool_policy'), null, $url);
+    //     $category->add_node($node);
+    // }
 
     return true;
 }
