@@ -18,7 +18,7 @@ $CFG->dboptions = array (
   'dbcollation' => 'utf8mb4_general_ci',
 );
 
-$CFG->wwwroot   = 'http://52.91.111.242';
+$CFG->wwwroot   = 'http://44.192.61.55';
 $CFG->dataroot  = '/var/www/moodledata';
 $CFG->admin     = 'admin';
 

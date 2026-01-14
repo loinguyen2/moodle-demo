@@ -114,153 +114,153 @@ if ($hassiteconfig
     // Stuff under the "roles" subcategory.
 
     // User policies settingpage.
-    $temp = new admin_settingpage('userpolicies', new lang_string('userpolicies', 'admin'));
+    // $temp = new admin_settingpage('userpolicies', new lang_string('userpolicies', 'admin'));
     if ($ADMIN->fulltree) {
-        if (!during_initial_install()) {
-            $context = context_system::instance();
+        // if (!during_initial_install()) {
+        //     $context = context_system::instance();
 
-            $otherroles      = array();
-            $guestroles      = array();
-            $userroles       = array();
-            $creatornewroles = array();
+        //     $otherroles      = array();
+        //     $guestroles      = array();
+        //     $userroles       = array();
+        //     $creatornewroles = array();
 
-            $defaultteacherid = null;
-            $defaultuserid    = null;
-            $defaultguestid   = null;
+        //     $defaultteacherid = null;
+        //     $defaultuserid    = null;
+        //     $defaultguestid   = null;
 
-            $roles = role_fix_names(get_all_roles(), null, ROLENAME_ORIGINALANDSHORT);
-            foreach ($roles as $role) {
-                $rolename = $role->localname;
-                switch ($role->archetype) {
-                    case 'manager':
-                        $creatornewroles[$role->id] = $rolename;
-                        break;
-                    case 'coursecreator':
-                        break;
-                    case 'editingteacher':
-                        $defaultteacherid = isset($defaultteacherid) ? $defaultteacherid : $role->id;
-                        $creatornewroles[$role->id] = $rolename;
-                        break;
-                    case 'teacher':
-                        $creatornewroles[$role->id] = $rolename;
-                        break;
-                    case 'student':
-                        break;
-                    case 'guest':
-                        $defaultguestid = isset($defaultguestid) ? $defaultguestid : $role->id;
-                        $guestroles[$role->id] = $rolename;
-                        break;
-                    case 'user':
-                        $defaultuserid = isset($defaultuserid) ? $defaultuserid : $role->id;
-                        $userroles[$role->id] = $rolename;
-                        break;
-                    case 'frontpage':
-                        break;
-                    default:
-                        $creatornewroles[$role->id] = $rolename;
-                        $otherroles[$role->id] = $rolename;
-                        break;
-                }
-            }
+        //     $roles = role_fix_names(get_all_roles(), null, ROLENAME_ORIGINALANDSHORT);
+        //     foreach ($roles as $role) {
+        //         $rolename = $role->localname;
+        //         switch ($role->archetype) {
+        //             case 'manager':
+        //                 $creatornewroles[$role->id] = $rolename;
+        //                 break;
+        //             case 'coursecreator':
+        //                 break;
+        //             case 'editingteacher':
+        //                 $defaultteacherid = isset($defaultteacherid) ? $defaultteacherid : $role->id;
+        //                 $creatornewroles[$role->id] = $rolename;
+        //                 break;
+        //             case 'teacher':
+        //                 $creatornewroles[$role->id] = $rolename;
+        //                 break;
+        //             case 'student':
+        //                 break;
+        //             case 'guest':
+        //                 $defaultguestid = isset($defaultguestid) ? $defaultguestid : $role->id;
+        //                 $guestroles[$role->id] = $rolename;
+        //                 break;
+        //             case 'user':
+        //                 $defaultuserid = isset($defaultuserid) ? $defaultuserid : $role->id;
+        //                 $userroles[$role->id] = $rolename;
+        //                 break;
+        //             case 'frontpage':
+        //                 break;
+        //             default:
+        //                 $creatornewroles[$role->id] = $rolename;
+        //                 $otherroles[$role->id] = $rolename;
+        //                 break;
+        //         }
+        //     }
 
-            if (empty($guestroles)) {
-                $guestroles[0] = new lang_string('none');
-                $defaultguestid = 0;
-            }
+        //     if (empty($guestroles)) {
+        //         $guestroles[0] = new lang_string('none');
+        //         $defaultguestid = 0;
+        //     }
 
-            if (empty($userroles)) {
-                $userroles[0] = new lang_string('none');
-                $defaultuserid = 0;
-            }
+        //     if (empty($userroles)) {
+        //         $userroles[0] = new lang_string('none');
+        //         $defaultuserid = 0;
+        //     }
 
-            $restorersnewrole = $creatornewroles;
-            $restorersnewrole[0] = new lang_string('none');
+        //     $restorersnewrole = $creatornewroles;
+        //     $restorersnewrole[0] = new lang_string('none');
 
-            $temp->add(new admin_setting_configselect('notloggedinroleid', new lang_string('notloggedinroleid', 'admin'),
-                          new lang_string('confignotloggedinroleid', 'admin'), $defaultguestid, ($guestroles + $otherroles)));
-            $temp->add(new admin_setting_configselect('guestroleid', new lang_string('guestroleid', 'admin'),
-                          new lang_string('guestroleid_help', 'admin'), $defaultguestid, ($guestroles + $otherroles)));
-            $temp->add(new admin_setting_configselect('defaultuserroleid', new lang_string('defaultuserroleid', 'admin'),
-                          new lang_string('configdefaultuserroleid', 'admin'), $defaultuserid, ($userroles + $otherroles)));
-            $temp->add(new admin_setting_configselect('creatornewroleid', new lang_string('creatornewroleid', 'admin'),
-                          new lang_string('creatornewroleid_help', 'admin'), $defaultteacherid, $creatornewroles));
-            $temp->add(new admin_setting_configselect('restorernewroleid', new lang_string('restorernewroleid', 'admin'),
-                          new lang_string('restorernewroleid_help', 'admin'), $defaultteacherid, $restorersnewrole));
+        //     $temp->add(new admin_setting_configselect('notloggedinroleid', new lang_string('notloggedinroleid', 'admin'),
+        //                   new lang_string('confignotloggedinroleid', 'admin'), $defaultguestid, ($guestroles + $otherroles)));
+        //     $temp->add(new admin_setting_configselect('guestroleid', new lang_string('guestroleid', 'admin'),
+        //                   new lang_string('guestroleid_help', 'admin'), $defaultguestid, ($guestroles + $otherroles)));
+        //     $temp->add(new admin_setting_configselect('defaultuserroleid', new lang_string('defaultuserroleid', 'admin'),
+        //                   new lang_string('configdefaultuserroleid', 'admin'), $defaultuserid, ($userroles + $otherroles)));
+        //     $temp->add(new admin_setting_configselect('creatornewroleid', new lang_string('creatornewroleid', 'admin'),
+        //                   new lang_string('creatornewroleid_help', 'admin'), $defaultteacherid, $creatornewroles));
+        //     $temp->add(new admin_setting_configselect('restorernewroleid', new lang_string('restorernewroleid', 'admin'),
+        //                   new lang_string('restorernewroleid_help', 'admin'), $defaultteacherid, $restorersnewrole));
 
-            // Release memory.
-            unset($otherroles);
-            unset($guestroles);
-            unset($userroles);
-            unset($creatornewroles);
-            unset($restorersnewrole);
-        }
+        //     // Release memory.
+        //     unset($otherroles);
+        //     unset($guestroles);
+        //     unset($userroles);
+        //     unset($creatornewroles);
+        //     unset($restorersnewrole);
+        // }
 
-        $temp->add(new admin_setting_configcheckbox('enroladminnewcourse', new lang_string('enroladminnewcourse', 'admin'),
-            new lang_string('enroladminnewcourse_help', 'admin'), 1));
+        // $temp->add(new admin_setting_configcheckbox('enroladminnewcourse', new lang_string('enroladminnewcourse', 'admin'),
+        //     new lang_string('enroladminnewcourse_help', 'admin'), 1));
 
-        $temp->add(new admin_setting_configcheckbox('autologinguests', new lang_string('autologinguests', 'admin'), new lang_string('configautologinguests', 'admin'), 0));
+        // $temp->add(new admin_setting_configcheckbox('autologinguests', new lang_string('autologinguests', 'admin'), new lang_string('configautologinguests', 'admin'), 0));
 
-        $temp->add(new admin_setting_configmultiselect('hiddenuserfields', new lang_string('hiddenuserfields', 'admin'),
-                   new lang_string('confighiddenuserfields', 'admin'), array(),
-                       array('description' => new lang_string('description'),
-                             'email' => new lang_string('email'),
-                             'city' => new lang_string('city'),
-                             'country' => new lang_string('country'),
-                             'moodlenetprofile' => new lang_string('moodlenetprofile', 'user'),
-                             'timezone' => new lang_string('timezone'),
-                             'firstaccess' => new lang_string('firstaccess'),
-                             'lastaccess' => new lang_string('lastaccess'),
-                             'lastip' => new lang_string('lastip'),
-                             'mycourses' => new lang_string('mycourses'),
-                             'groups' => new lang_string('groups'),
-                             'suspended' => new lang_string('suspended', 'auth'),
-                       )));
+        // $temp->add(new admin_setting_configmultiselect('hiddenuserfields', new lang_string('hiddenuserfields', 'admin'),
+        //            new lang_string('confighiddenuserfields', 'admin'), array(),
+        //                array('description' => new lang_string('description'),
+        //                      'email' => new lang_string('email'),
+        //                      'city' => new lang_string('city'),
+        //                      'country' => new lang_string('country'),
+        //                      'moodlenetprofile' => new lang_string('moodlenetprofile', 'user'),
+        //                      'timezone' => new lang_string('timezone'),
+        //                      'firstaccess' => new lang_string('firstaccess'),
+        //                      'lastaccess' => new lang_string('lastaccess'),
+        //                      'lastip' => new lang_string('lastip'),
+        //                      'mycourses' => new lang_string('mycourses'),
+        //                      'groups' => new lang_string('groups'),
+        //                      'suspended' => new lang_string('suspended', 'auth'),
+        //                )));
 
         // Select fields to display as part of user identity (only to those
         // with moodle/site:viewuseridentity).
         // Options include fields from the user table that might be helpful to
         // distinguish when adding or listing users ('I want to add the John
         // Smith from Science faculty') and any custom profile fields.
-        $temp->add(new admin_setting_configmulticheckbox('showuseridentity',
-                new lang_string('showuseridentity', 'admin'),
-                new lang_string('showuseridentity_desc', 'admin'), ['email' => 1],
-                function() {
-                    global $CFG;
-                    require_once($CFG->dirroot.'/user/profile/lib.php');
+        // $temp->add(new admin_setting_configmulticheckbox('showuseridentity',
+        //         new lang_string('showuseridentity', 'admin'),
+        //         new lang_string('showuseridentity_desc', 'admin'), ['email' => 1],
+        //         function() {
+        //             global $CFG;
+        //             require_once($CFG->dirroot.'/user/profile/lib.php');
 
-                    // Basic fields available in user table.
-                    $fields = [
-                        'username'    => new lang_string('username'),
-                        'idnumber'    => new lang_string('idnumber'),
-                        'email'       => new lang_string('email'),
-                        'phone1'      => new lang_string('phone1'),
-                        'phone2'      => new lang_string('phone2'),
-                        'department'  => new lang_string('department'),
-                        'institution' => new lang_string('institution'),
-                        'city'        => new lang_string('city'),
-                        'country'     => new lang_string('country'),
-                    ];
+        //             // Basic fields available in user table.
+        //             $fields = [
+        //                 'username'    => new lang_string('username'),
+        //                 'idnumber'    => new lang_string('idnumber'),
+        //                 'email'       => new lang_string('email'),
+        //                 'phone1'      => new lang_string('phone1'),
+        //                 'phone2'      => new lang_string('phone2'),
+        //                 'department'  => new lang_string('department'),
+        //                 'institution' => new lang_string('institution'),
+        //                 'city'        => new lang_string('city'),
+        //                 'country'     => new lang_string('country'),
+        //             ];
 
-                    // Custom profile fields.
-                    $profilefields = profile_get_custom_fields();
-                    foreach ($profilefields as $field) {
-                        // Only reasonable-length text fields can be used as identity fields.
-                        if ($field->param2 > 255 || $field->datatype != 'text') {
-                            continue;
-                        }
-                        $fields['profile_field_' . $field->shortname] = format_string($field->name, true,
-                            ['context' => context_system::instance()]) . ' *';
-                    }
+        //             // Custom profile fields.
+        //             $profilefields = profile_get_custom_fields();
+        //             foreach ($profilefields as $field) {
+        //                 // Only reasonable-length text fields can be used as identity fields.
+        //                 if ($field->param2 > 255 || $field->datatype != 'text') {
+        //                     continue;
+        //                 }
+        //                 $fields['profile_field_' . $field->shortname] = format_string($field->name, true,
+        //                     ['context' => context_system::instance()]) . ' *';
+        //             }
 
-                    return $fields;
-                }));
-        $setting = new admin_setting_configtext('fullnamedisplay', new lang_string('fullnamedisplay', 'admin'),
-            new lang_string('configfullnamedisplay', 'admin'), 'language', PARAM_TEXT, 50);
-        $setting->set_force_ltr(true);
-        $temp->add($setting);
-        $temp->add(new admin_setting_configtext('alternativefullnameformat', new lang_string('alternativefullnameformat', 'admin'),
-                new lang_string('alternativefullnameformat_desc', 'admin'),
-                'language', PARAM_RAW, 50));
+        //             return $fields;
+        //         }));
+        // $setting = new admin_setting_configtext('fullnamedisplay', new lang_string('fullnamedisplay', 'admin'),
+        //     new lang_string('configfullnamedisplay', 'admin'), 'language', PARAM_TEXT, 50);
+        // $setting->set_force_ltr(true);
+        // $temp->add($setting);
+        // $temp->add(new admin_setting_configtext('alternativefullnameformat', new lang_string('alternativefullnameformat', 'admin'),
+        //         new lang_string('alternativefullnameformat_desc', 'admin'),
+        //         'language', PARAM_RAW, 50));
         // $temp->add(new admin_setting_configtext('maxusersperpage', new lang_string('maxusersperpage','admin'), new lang_string('configmaxusersperpage','admin'), 100, PARAM_INT));
         // $temp->add(new admin_setting_configcheckbox('enablegravatar', new lang_string('enablegravatar', 'admin'), new lang_string('enablegravatar_help', 'admin'), 0));
         // $temp->add(new admin_setting_configtext('gravatardefaulturl', new lang_string('gravatardefaulturl', 'admin'), new lang_string('gravatardefaulturl_help', 'admin'), 'mm'));
@@ -280,13 +280,15 @@ if ($hassiteconfig
 // Privacy settings.
 if ($hassiteconfig) {
     $temp = new admin_settingpage('privacysettings', new lang_string('privacysettings', 'admin'));
+    // Add privacysettings to root (required for tool_dataprivacy plugin)
+    $ADMIN->add('root', $temp);
 
-    $options = array(
-        0 => get_string('no'),
-        1 => get_string('yes')
-    );
-    $url = new moodle_url('/admin/settings.php?section=supportcontact');
-    $url = $url->out();
+    // $options = array(
+    //     0 => get_string('no'),
+    //     1 => get_string('yes')
+    // );
+    // $url = new moodle_url('/admin/settings.php?section=supportcontact');
+    // $url = $url->out();
     // $setting = new admin_setting_configselect('agedigitalconsentverification',
     //     new lang_string('agedigitalconsentverification', 'admin'),
     //     new lang_string('agedigitalconsentverification_desc', 'admin', $url), 0, $options);
@@ -326,7 +328,8 @@ if ($hassiteconfig) {
     // );
     // $temp->add($setting);
 
-    $ADMIN->add('privacy', $temp);
+    // $ADMIN->add('privacy', $temp);
+
 
     // Policy settings.
     // $temp = new admin_settingpage('policysettings', new lang_string('policysettings', 'admin'));

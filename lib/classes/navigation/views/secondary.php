@@ -158,6 +158,7 @@ class secondary extends view {
      * @return array
      */
     protected function get_default_category_more_menu_nodes(): array {
+        // Custom: Disabled "More" menu items for category context.
         return ['addsubcat', 'roles', 'permissions', 'contentbank', 'cohort', 'filters', 'restorecourse'];
     }
     /**
@@ -231,7 +232,7 @@ class secondary extends view {
             case CONTEXT_COURSECAT:
                 $this->headertitle = get_string('categoryheader');
                 $this->load_category_navigation();
-                $defaultmoremenunodes = $this->get_default_category_more_menu_nodes();
+                // $defaultmoremenunodes = $this->get_default_category_more_menu_nodes();
                 break;
             case CONTEXT_SYSTEM:
                 $this->headertitle = get_string('homeheader');
@@ -738,7 +739,7 @@ class secondary extends view {
 
             // We have finished inserting the initial structure.
             // Populate the menu with the rest of the nodes available.
-            $this->load_remaining_nodes($mainnode, $nodes);
+            // $this->load_remaining_nodes($mainnode, $nodes);
         }
     }
 
